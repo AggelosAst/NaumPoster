@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await SE.getAllImages()
     const searchInput = document.querySelector("#search");
     const randomImage = SE.getRandomImage()
-    searchInput.placeholder = `${randomImage.id} or ALL for every image`
+    searchInput.placeholder = `${!randomImage ? "ALL for every image" : `${randomImage.id} or ALL for every image`}`
     searchInput.addEventListener("keydown", async (k) => {
         if (k.keyCode === 13) {
             k.preventDefault();
@@ -127,8 +127,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             src: image.src /* VERY EXPENSIVE!!! But it won't happen a lot. */
                         }
                     })
-                    //Find by id
-                    //api call
                 }
             }
         }
