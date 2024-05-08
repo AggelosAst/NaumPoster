@@ -1,10 +1,14 @@
-import logger from "morgan"
+import morgan from "morgan"
 import express, {Express} from "express";
-import morgan from "morgan";
+import cors from "cors"
 
 // -- ROUTES -- \\
+import {router as homePage} from "../routes/home"
+import {router as upload} from "../routes/upload";
+import {router as getImages } from "../routes/getimages";
+import {router as findImage } from "../routes/findimage";
 
-import { router as homePage } from "../routes/home"
+
 import {ServerOptions} from "../types/serverOptions";
 
 
@@ -23,6 +27,13 @@ export class Server {
         this.port = options.port;
         this.app = express();
         this.app.use(morgan("dev"));
+        this.app.disable("x-powered-by");
+        this.app.use(cors({
+            origin: ["http://127.0.0.1", "http://localhost"],
+            optionsSuccessStatus: 200,
+            methods: ["GET", "POST", "PUT"]
+        }))
+        this.app.use(express.json())
         this.app.use("/public", express.static("./src/public", {
             cacheControl: true,
             etag: true,
@@ -32,6 +43,9 @@ export class Server {
         // -- Set Routes -- \\
 
         this.app.use(homePage);
+        this.app.use(upload)
+        this.app.use(getImages)
+        this.app.use(findImage)
     }
 
     /**

@@ -4,9 +4,32 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Naum Gallery</title>
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <style>
+        .naum {
+            max-width: 50% !important;
+            max-height: 50% !important;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+<div class="container text-center w-50 d-flex justify-content-center align-items-center flex-column position-relative mt-5">
+    <h1 class="text-secondary user-select-none">Search in <span class="text-primary">Naum Gallery</span></h1>
+    <div class="container d-flex justify-content-center align-items-center flex-row gap-2">
+        <input class="form-control" type="text" id="search" placeholder="fbdb7cc0-056e-4216-a8c7-d6ca4281871e">
+    </div>
+
+    <div class="container text-center mt-5">
+        <div class="images row row-cols-lg-3 g-3 d-flex justify-content-center">
+
+        </div>
+    </div>
+</div>
+
 <script src="../public/js/home.js" defer type="module"></script>
+<script src="../public/js/axios.js"></script>
+<script src="../public/js/luxon.js"></script>
 </body>
 </html>

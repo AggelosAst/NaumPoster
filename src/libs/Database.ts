@@ -6,9 +6,11 @@ import {Image} from "../types/Image";
 export class Database implements DatabaseI {
     private readonly DatabaseObject: PrismaClient
     private ready: boolean = false
+    public static Instance : Database
 
     public constructor() {
         this.DatabaseObject = new PrismaClient()
+        Database.Instance = this
     }
 
     public async connect(): Promise<string | void> {
@@ -35,7 +37,23 @@ export class Database implements DatabaseI {
         })
     }
 
-    public async findImageById(imageId: string): Promise<Image> {
+    public async getAllImages(): Promise<Image[]> {
+        return new Promise(async (resolve, reject) => {
+            await this.DatabaseObject.images.findMany({
+                select: {
+                    timestamp: true,
+                    src: true,
+                    id: true
+                }
+            }).then((images: Image[]) => {
+                return resolve(images)
+            }).catch(e => {
+                reject(e)
+            })
+        })
+    }
+
+    public async findImageById(imageId: string): Promise<Image | undefined> {
         return new Promise(async (resolve, reject) => {
             await this.DatabaseObject.images.findUnique({
                 where: {
@@ -43,11 +61,7 @@ export class Database implements DatabaseI {
                 }
             }).then((r: Image | null) => {
                 if (!r) {
-                    return reject({
-                        id: "0",
-                        timestamp: new Date(),
-                        src: "None"
-                    })
+                    return resolve(undefined)
                 } else {
                     return resolve(r)
                 }
