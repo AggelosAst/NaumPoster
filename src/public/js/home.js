@@ -2,16 +2,18 @@ class SearchEngine {
     imageCache = undefined
     indexedImageIds = {}  /* Record<string, string> = {} */
     async getAllImages() {
-        let response
-        try {
-            response = await axios.get("http://127.0.0.1/getimages")
-            if (response.status === 200) {
-                this.imageCache = response.data
+        return new Promise(async (resolve, reject) => {
+            let response
+            try {
+                response = await axios.get("http://127.0.0.1/getimages")
+                if (response.status === 200) {
+                    this.imageCache = response.data
+                    resolve(true)
+                }
+            } catch (e) {
+                alert(`Couldn't get all images. Check console for more.`)
             }
-        } catch (e) {
-            alert(`Couldn't get all images. Check console for more.`)
-        }
-
+        })
     }
 
     async getImageById(id) {
@@ -80,15 +82,16 @@ class SearchEngine {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const SE = new SearchEngine()
-    SE.getAllImages()
+    await SE.getAllImages()
     const searchInput = document.querySelector("#search");
+    const randomImage = SE.getRandomImage()
+    searchInput.placeholder = `${randomImage.id} or ALL for every image`
     searchInput.addEventListener("keydown", async (k) => {
         if (k.keyCode === 13) {
             k.preventDefault();
             if (searchInput.value === "") {
-                const randomImage = SE.getRandomImage()
                 if (!SE.indexedImageIds[randomImage.id]) {
                     console.log("[CACHE]: Un-cached image D:+")
                     SE.createImageElement(randomImage.src, randomImage.timestamp, randomImage.id)
@@ -96,6 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         id: randomImage.id,
                         timestamp: randomImage.timestamp,
                         src: randomImage.src /* VERY EXPENSIVE!!! But it won't happen a lot. */
+                    }
+                }
+            } else if (searchInput.value === "ALL") {
+                for (let image in SE.imageCache) {
+                    const accessor = SE.imageCache[image]
+                    SE.createImageElement(accessor.src, accessor.timestamp, accessor.id)
+                    SE.indexedImageIds[image.id] = {
+                        id: image.id,
+                        timestamp: image.timestamp,
+                        src: image.src /* VERY EXPENSIVE!!! But it won't happen a lot. */
                     }
                 }
             } else {
