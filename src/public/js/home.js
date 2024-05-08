@@ -56,7 +56,7 @@ class SearchEngine {
         const image = document.createElement("img")
         image.src = src
         image.id = id
-        image.classList.add("card-img", "mb-2", "naum")
+        image.classList.add("card-img", "mb-2", "naum", "user-select-none")
         image.addEventListener("mousedown", () => window.open(src, "_blank"))
         const colDiv = document.createElement("div")
         colDiv.classList.add("col", "col-lg-4")
@@ -67,10 +67,10 @@ class SearchEngine {
         cardBody.classList.add("card-body")
         cardBody.appendChild(image)
         const takenAtTitle = document.createElement("h6")
-        takenAtTitle.classList.add("card-text", "fs-5", "text-start", "text-muted", "text-center")
+        takenAtTitle.classList.add("card-text", "fs-5", "text-start", "text-muted", "text-center", "user-select-none")
         takenAtTitle.textContent = "Taken At"
         const takenAtValue = document.createElement("h6")
-        takenAtValue.classList.add("card-text", "fs-5", "text-start", "text-muted", "text-center")
+        takenAtValue.classList.add("card-text", "fs-5", "text-start", "text-muted", "text-center", "user-select-none")
         takenAtValue.textContent = luxon.DateTime.fromISO(takenAt).toHTTP()
         const downloadButton = document.createElement("button")
         downloadButton.classList.add("btn", "bg-primary", "text-white", "w-100")
