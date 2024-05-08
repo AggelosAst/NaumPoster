@@ -19,7 +19,7 @@ export class Database implements DatabaseI {
                 await this.DatabaseObject.$connect()
                 this.ready = true
                 resolve()
-            } catch (e) {
+            } catch (e: any) {
                 return reject(e)
             }
         })
@@ -31,7 +31,7 @@ export class Database implements DatabaseI {
                 data: image
             }).then((r: Image) => {
                 return resolve(r)
-            }).catch((e => {
+            }).catch(((e: any) => {
                 reject(e)
             }))
         })
@@ -47,7 +47,7 @@ export class Database implements DatabaseI {
                 }
             }).then((images: Image[]) => {
                 return resolve(images)
-            }).catch(e => {
+            }).catch((e: any) => {
                 reject(e)
             })
         })
@@ -65,7 +65,7 @@ export class Database implements DatabaseI {
                 } else {
                     return resolve(r)
                 }
-            }).catch((e => {
+            }).catch(((e: any) => {
                 reject(e)
             }))
         })
@@ -79,7 +79,7 @@ export class Database implements DatabaseI {
                 }
             }).then((r: Image) => {
                 return resolve(r)
-            }).catch((e => {
+            }).catch(((e: any) => {
                 reject(e)
             }))
         })
