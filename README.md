@@ -14,4 +14,3 @@ Its **pretty much** advised to not use such techniques for image hosts as base64
 3. Uses **XML** for the **/upload** api as a flexible way as it contains schemas.
 4. Uses **JSON** for the **/getimages** api as a response for the uploaded images as XML doesnt support characters included in base64 strings. [Supported Characters](https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references)
 ~~5~~. *Not a featuure*, *but*, this approach makes it so your images are * " invisible "* to the naked eye and are saved in a database not wasily viewable.
-  
