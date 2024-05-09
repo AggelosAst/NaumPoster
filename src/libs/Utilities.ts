@@ -5,7 +5,7 @@ export class Utilities {
         return url.includes("discordapp");
     }
 
-    public static returnBse64ForImage(url: string): Promise<string> {
+    public static returnBase64ForImage(url: string): Promise<string> {
         return new Promise(async (resolve, reject) => {
             await axios.get(url, {
                 headers: {

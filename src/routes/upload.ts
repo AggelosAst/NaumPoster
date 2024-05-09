@@ -41,7 +41,7 @@ router.post("/upload", XML.XMLMiddleware, async function (req: Request, res: Res
             }
         }).constructXML())
     }
-    await Utilities.returnBse64ForImage(imageLink).then(async (base64: string) => {
+    await Utilities.returnBase64ForImage(imageLink).then(async (base64: string) => {
         const image: Image = {
             id: crypto.randomUUID(),
             src: base64,
