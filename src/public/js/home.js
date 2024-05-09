@@ -83,6 +83,7 @@ class SearchEngine {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const gh = document.querySelector(".bi-github")
     const SE = new SearchEngine()
     await SE.getAllImages()
     const searchInput = document.querySelector("#search");
@@ -93,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             k.preventDefault();
             if (searchInput.value === "") {
                 if (!SE.indexedImageIds[randomImage.id]) {
-                    console.log("[CACHE]: Un-cached image D:+")
+                    console.log("[CACHE]: Un-cached image D:")
                     SE.createImageElement(randomImage.src, randomImage.timestamp, randomImage.id)
                     SE.indexedImageIds[randomImage.id] = {
                         id: randomImage.id,
@@ -131,4 +132,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         }
     })
+    gh.addEventListener("mouseup", () => { /* MouseUp because full click */
+        window.open("https://github.com/AggelosAst/NaumPoster", "_self")
+    })
+
 })
