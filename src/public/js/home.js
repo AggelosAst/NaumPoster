@@ -83,9 +83,12 @@ class SearchEngine {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+    const preloader = document.querySelector(".cock")
     const gh = document.querySelector(".bi-github")
     const SE = new SearchEngine()
+    preloader.style.opacity = 1
     await SE.getAllImages()
+    preloader.style.opacity = 0
     const searchInput = document.querySelector("#search");
     const randomImage = SE.getRandomImage()
     searchInput.placeholder = `${!randomImage ? "ALL for every image" : `${randomImage.id} or ALL for every image`}`
@@ -135,5 +138,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     gh.addEventListener("mouseup", () => { /* MouseUp because full click */
         window.open("https://github.com/AggelosAst/NaumPoster", "_self")
     })
-
 })

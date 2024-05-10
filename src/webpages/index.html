@@ -23,6 +23,12 @@
         .bi:hover {
             transform: scale(1.2);
         }
+        .preloader {
+            opacity: 0;
+            transition-property: opacity;
+            transition-timing-function: ease-in-out;
+            transition-duration: 0.5s;
+        }
     </style>
 </head>
 <body>
@@ -30,6 +36,9 @@
     <h1 class="text-secondary user-select-none">Search in <span class="text-primary">Naum Gallery</span></h1>
     <div class="container d-flex justify-content-center align-items-center flex-row gap-2">
         <input class="form-control" type="text" id="search">
+        <div class="spinner-border preloader" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 
     <div class="container text-center mt-5">
