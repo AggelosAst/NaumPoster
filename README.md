@@ -2,7 +2,7 @@
 
 ## A very infefficient (yet functional) image uploader and viewer using base64 encoded image format
 
-Its **pretty much** advised to not use such techniques for image hosts as base64 image strings can get **VERY** large in size, therefore result in longer bandwith etc.
+Its **pretty much** advised to not use such techniques for image hosts as base64 image strings can get **VERY** large in size. Also, base64 encoding inflates the size of the original binary data by approximately 33%, therefore result in longer bandwith etc.
 
 
 ## Disclaimer; This was made in an attempt to discover the outcomes of using base64 encoded images instead of saving them locally as .png/.jpg files.
