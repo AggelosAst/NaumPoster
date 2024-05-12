@@ -5,11 +5,13 @@ import cors from "cors"
 // -- ROUTES -- \\
 import {router as homePage} from "../routes/home"
 import {router as upload} from "../routes/upload";
-import {router as getImages } from "../routes/getimages";
+import {router, router as getImages} from "../routes/getimages";
 import {router as findImage } from "../routes/findimage";
 
 
 import {ServerOptions} from "../types/serverOptions";
+import compression from "compression";
+import zlib from "zlib";
 
 
 // -- Server -- \\
